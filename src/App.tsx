@@ -1,14 +1,16 @@
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import "./App.css";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "./redux/store";
-import { increment } from "./redux/counter/counterSlice";
+
+import { decrement, increment } from "./redux/counter/counterSlice";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import Button from "react-bootstrap/Button";
 
 function App() {
-  const count = useSelector((state: RootState) => state.count.value);
+  // const count = useSelector((state: RootState) => state.count.value);
 
-  const dispatch = useDispatch();
+  const count = useAppSelector((state) => state.count.value);
+
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -22,8 +24,10 @@ function App() {
       </div>
       <div>
         <h1>My current count = {count} </h1>
+        <Button variant="warning">Test Bootstrap</Button>
         <div>
-          <button onClick={() => dispatch(increment())}>Increase + 1</button>
+          <button onClick={() => dispatch(increment())}>Increase</button>
+          <button onClick={() => dispatch(decrement())}>Decrease</button>
         </div>
       </div>
     </>
